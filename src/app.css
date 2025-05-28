@@ -1,26 +1,11 @@
-@import 'tailwindcss';
-/* - **Neutral 900**: `hsl(227, 75%, 14%)`
-- **Neutral 800**: `hsl(226, 25%, 17%)`
-- **Neutral 700**: `hsl(225, 23%, 24%)`
-- **Neutral 600**: `hsl(226, 11%, 37%)`
-- **Neutral 300**: `hsl(0, 0%, 78%)`
-- **Neutral 200**: `hsl(217, 61%, 90%)`
-- **Neutral 100**: `hsl(0, 0%, 93%)`
-- **Neutral 0**: `hsl(200, 60%, 99%)`
-
-### Red
-
-- **Red 400**: `hsl(3, 86%, 64%)`
-- **Red 500**: `hsl(3, 71%, 56%)`
-- **Red 700**: `hsl(3, 77%, 44%)`
-
-### Gradient
-
-- **Light Gradient**: `linear-gradient(180deg, #EBF2FC 0%, #EEF8F9 100%)`
-- **Dark Gradient**: `linear-gradient(180deg, #040918 0%, #091540 100%)` */
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
 /* <!-- fonts.google --> */
-* {transition : 300ms}
+* {
+	transition: 300ms ease-in-out;
+}
 
 html {
 	scroll-behavior: smooth;
@@ -29,7 +14,7 @@ html {
 body {
 	background: linear-gradient(180deg, #040918 0%, #091540 100%);
 	color: whitesmoke;
-	font-family: 'Overpass', sans-serif;
+	font-family: "Overpass", sans-serif;
 	font-optical-sizing: auto;
 	font-style: normal;
 }
@@ -40,9 +25,9 @@ body {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	justify-content: center;
+	/* justify-content: center; */
 	/* font-size: 16px; */
-	/* padding: 3rem 1rem; */
+	padding: 3rem 1rem;
 	margin: 0 auto;
 }
 
