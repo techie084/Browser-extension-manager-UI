@@ -1,5 +1,8 @@
 <script lang="ts">
-	const cards = [
+	let { filterId, toggle } = $props();
+
+	// card array objects
+	let cards = $state([
 		{
 			id: 0,
 			title: 'DevLens',
@@ -73,22 +76,35 @@
 			description: 'enhanced developer console with advanced filtering and logging.',
 			image: 'logo-console-plus.svg'
 		}
-	];
+	]);
 
-	let checked = $state(false);
+	// toggle state for toggle switch
+	let checked = $state<boolean>(false);
 
-	let toggleState = $props();
-	// let filteredBtn;
+	// Remove single card function
+	const removeCard = (id: number) => {
+		cards = cards.filter((card) => card.id !== id);
+	};
 
-	// $derived( cards.filter(btn =toggleState[btn.id]))
+	// Add another functionality for adding back the removed card
+	// let filterTabs = (id: number) => {
+	// 	cards = cards.filter((card) => card.id !== id);
+	// };
+
+	let filterCards = $derived(
+		cards.filter((card) => {
+			if (!toggle) return true;
+			return card.id === filterId;
+		})
+	);
 </script>
 
 <section
-	class="border-neutral700 dark:text-neutral900 flex h-full w-full flex-col items-center gap-4 sm:grid sm:grid-cols-2 lg:grid-cols-3"
+	class="flex h-full w-full flex-col items-center gap-4 border-neutral700 dark:text-neutral900 sm:grid sm:grid-cols-2 lg:grid-cols-3"
 >
 	{#each cards as card}
 		<div
-			class="bg-neutral800 dark:bg-neutral100 flex h-full w-full flex-col items-center justify-between gap-3 rounded-xl p-6 shadow-md"
+			class="flex h-full w-full flex-col items-center justify-between gap-3 rounded-xl bg-neutral800 p-6 shadow-md dark:bg-neutral100"
 		>
 			<div class="flex items-start gap-3">
 				<img src={card.image} alt={card.image} />
@@ -98,17 +114,19 @@
 				</div>
 			</div>
 			<div class="mt-6 flex w-full justify-between">
-				<button class="border-neutral600 rounded-3xl border px-4 py-2" aria-label="true"
-					>Remove</button
+				<button
+					class="rounded-3xl border border-neutral600 px-4 py-2"
+					aria-label="true"
+					onclick={() => removeCard(card.id)}>Remove</button
 				>
 				<!-- toggle Switch button -->
-				<label class="bg-neutral700 relative h-8 w-14 cursor-pointer rounded-full">
+				<label class="relative h-8 w-14 cursor-pointer rounded-full bg-neutral700">
 					<input type="checkbox" class="peer sr-only" bind:checked />
 					<span
-						class="bg-neutral600 peer-checked:bg-red500 h-full w-full rounded-full transition-colors duration-300"
+						class="h-full w-full rounded-full bg-neutral600 transition-colors duration-300 peer-checked:bg-red500"
 					></span>
 					<span
-						class="bg-neutral0 absolute right-1 top-1 h-6 w-6 rounded-full shadow-md transition-all duration-300 peer-checked:-translate-x-6 peer-active:w-12 peer-checked:peer-active:translate-x-2"
+						class={`absolute right-1 top-1 h-6 w-6 rounded-full bg-neutral0 shadow-md transition-all duration-300 ${'peer-checked:-translate-x-6 peer-active:w-12 peer-checked:peer-active:translate-x-2'}`}
 					></span>
 				</label>
 			</div>

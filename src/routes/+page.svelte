@@ -1,8 +1,16 @@
 <script lang="ts">
-	import Nav from "$lib/components/nav.svelte";
-	import Tabs from "$lib/components/tabs.svelte";
-	import ExtnCard from "$lib/components/extn-card.svelte";
-	import Footer from "$lib/components/footer.svelte";
+	import Nav from '$lib/components/nav.svelte';
+	import Tabs from '$lib/components/tabs.svelte';
+	import ExtnCard from '$lib/components/extn-card.svelte';
+	import Footer from '$lib/components/footer.svelte';
+
+	let filterId: number | null = $state(null);
+	let toggle = $state(true);
+
+	let handleToggle = (toggleValue, id: number) => {
+		toggle = toggleValue;
+		filterId = id;
+	};
 </script>
 
 <!-- <div class="loader">
@@ -115,8 +123,8 @@
 
 <!-- Components -->
 <Nav />
-<Tabs />
-<ExtnCard />
+<Tabs onToggle={handleToggle} />
+<ExtnCard filterId="(filterId)" {toggle} />
 <Footer />
 
 <!-- <style>
